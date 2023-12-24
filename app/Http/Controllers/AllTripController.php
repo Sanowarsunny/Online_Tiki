@@ -8,9 +8,10 @@ use App\Models\Trip;
 class AllTripController extends Controller
 {
     function all_trip() {
-        $trips = Trip::all();
+        // $trips = Trip::all();
+        $trips = Trip::orderBy('created_at', 'desc')->paginate(10);
         
-        return view('pages.all_trip',['trips' => $trips]);
+        return view('pages.all_trip',compact('trips'));
     }
 
     public function deleteTrip($id)
