@@ -18,5 +18,10 @@ class Trip extends Model
         'departure_time',
         'arrival_time',
     ];
+    // Define the relationship between Trip and Customer
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
     
 }

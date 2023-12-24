@@ -13,5 +13,10 @@ class Customer extends Model
     {
         return $this->hasMany(Seat::class);
     }
+    // Define the inverse relationship between Customer and Trip
+    public function trip()
+    {
+        return $this->belongsTo(Trip::class);
+    }
 
 }

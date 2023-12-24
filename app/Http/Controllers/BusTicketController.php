@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 class BusTicketController extends Controller
 {
     //
-    function buy(){
-        return view('pages.buy');
+    function buy(Request $request){
+        $paribahanName = $request->input('paribahan_name');
+        $availableSeats = $request->input('available_seats');
+        return view('pages.buy',compact('paribahanName','availableSeats'));
     }
 
     function submit_buy(Request $request) {
@@ -17,7 +19,7 @@ class BusTicketController extends Controller
         $customer = Customer::create([
             'customer_name' => $request->input('name'),
             'email' => $request->input('email'),
-            'phone' => $request->input('phone_number'),
+            'phone' => $request->input('phone'),
         ]);
 
         // Store selected seat numbers
