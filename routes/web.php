@@ -6,6 +6,7 @@ use App\Http\Controllers\FindController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\AllTripController;
 use App\Http\Controllers\PurchasedController;
+use App\Http\Controllers\BusTicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,8 +47,8 @@ Route::prefix('bus')->middleware('auth')->group(function() {
 
     Route::get('/show', [FindController::class, 'show'])->name('bus.show');
 
-    Route::get('/buy-ticket', [FindController::class, 'buy'])->name('bus.buy-ticket');
-    Route::post('/buy-ticket', [FindController::class, 'submit_buy'])->name('bus.buy-ticket');
+    Route::get('/buy-ticket', [BusTicketController::class, 'buy'])->name('bus.buy-ticket');
+    Route::post('/buy-ticket', [BusTicketController::class, 'submit_buy'])->name('bus.buy-ticket');
 
     // Purchased Ticket Page
 

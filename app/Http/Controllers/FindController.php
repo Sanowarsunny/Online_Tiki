@@ -9,15 +9,16 @@ class FindController extends Controller
     {
         return view('pages.find');
     }
-    function buy(){
-        return view('pages.buy');
-    }
+    // function buy(){
+    //     return view('pages.buy');
+    // }
 
-    function submit_buy() {
-        return redirect()->route('bus.purchased-ticket');
-    }
+    // function submit_buy() {
+    //     return redirect()->route('bus.purchased-ticket');
+    // }
 
     function show(Request $request){
+        
         // $request->validate([
         //     'from' => 'required|string',
         //     'to' => 'required|string',

@@ -38,13 +38,13 @@
                                         To
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Booked Seats
+                                        Seats Number
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Fare/Seat
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Cancellation
+                                        Action
                                     </th>
                                 </tr>
                             </thead>
