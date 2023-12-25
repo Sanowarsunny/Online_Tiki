@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-            {{ __('Customer Details') }}
+            {{ __('Booking Details') }}
         </h2>
     </x-slot>
 
@@ -55,14 +55,10 @@
                             <input type="text" id="text" name="phone"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+880">
                         </div>
-                            
                         
                         <div class="mb-5">
-                            <label for="seat_numbers"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Available Seat
-                                Numbers</label>
-
-                            @for ($row = 'A'; $row <= 'I'; $row++)
+                            <label for="seat_numbers" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Available Seat Numbers</label>
+                        {{-- @for ($row = 'A'; $row <= 'I'; $row++)
                                 @for ($col = 1; $col <= 4; $col++)
                                     <label class="inline-flex items-center mx-2">
                                         <input type="checkbox" name="seat_numbers[]" value="{{ $row . $col }}"
@@ -71,9 +67,47 @@
                                     </label>
                                 @endfor
                                 <br>
-                            @endfor
-                           
+                            @endfor --}}
+                            
+                            {{-- @for ($row = 'A'; $row <= 'I'; $row++)
+                                @for ($col = 1; $col <= 4; $col++)
+                                    @php
+                                        $seat = $row . $col;
+                                    @endphp
+
+                                    @if (!in_array($seat, $seatNumbers))
+                                        <label class="inline-flex items-center mx-2">
+                                            <input type="checkbox" name="seat_numbers[]" value="{{ $seat }}"
+                                                class="form-checkbox text-blue-500 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <span class="ml-2">{{ $seat }}</span>
+                                        </label>
+                                    @endif
+                                @endfor
+                                <br>
+                            @endfor --}}
+                            <table>
+                                @for ($row = 'A'; $row <= 'I'; $row++)
+                                    <tr>
+                                        @for ($col = 1; $col <= 4; $col++)
+                                            @php
+                                                $seat = $row . $col;
+                                            @endphp
+                        
+                                            <td>
+                                                @if (!in_array($seat, $seatNumbers))
+                                                    <label class="inline-flex items-center mx-2">
+                                                        <input type="checkbox" name="seat_numbers[]" value="{{ $seat }}"
+                                                               class="form-checkbox text-blue-500 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                        <span class="ml-2">{{ $seat }}</span>
+                                                    </label>
+                                                @endif
+                                            </td>
+                                        @endfor
+                                    </tr>
+                                @endfor
+                            </table>
                         </div>
+                        
                         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Purchase</button>
                     </form>
 

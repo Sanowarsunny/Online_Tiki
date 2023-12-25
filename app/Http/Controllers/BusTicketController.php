@@ -10,15 +10,54 @@ use Illuminate\Http\Request;
 class BusTicketController extends Controller
 {
     
-    function buy(Request $request){
+    public function buy(Request $request){
         $busCode = $request->input('bus_code');
         $paribahanName = $request->input('paribahan_name');
         $availableSeats = $request->input('available_seats');
-        return view('pages.buy',compact('paribahanName','availableSeats','busCode'));
+        // Find the trip based on busCode
+        $id = $busCode;
+        $trip = Trip::find($id)->all();
+
+        // Get the seat numbers for the given trip
+        // $seatNumbers = Seat::where('trip_id', $busCode)->pluck('seat_number')->toArray();
+        // Get the seat numbers as a comma-separated string
+    $seatNumbersString = Seat::where('trip_id', $busCode)->pluck('seat_number')->implode(',');
+
+    // Convert the seat numbers string to an array
+    $seatNumbers = explode(',', $seatNumbersString);
+        //dd($seatNumbers);
+        // // If trip not found or no seats available, show an error or redirect
+        // if (!$trip || $trip->available_seats <= 0) {
+        //     // Handle the case where the trip or seats are not available
+        //     return view('pages.buy',compact('paribahanName','availableSeats','busCode'));
+        // }
+    
+        
+        return view('pages.buy',compact('paribahanName','availableSeats','busCode','seatNumbers'));
     }
-   
+    // public function buy(Request $request) {
+    //     $busCode = $request->query('busCode');
+    //     $paribahanName = $request->input('paribahan_name');
+    //     $availableSeats = $request->input('available_seats');
+    
+    //     // Find the trip based on busCode
+    //     $trip = Trip::find($busCode);
+    
+    //     // If trip not found or no seats available, show an error or redirect
+    //     if (!$trip || $trip->available_seats <= 0) {
+    //         // Handle the case where the trip or seats are not available
+    //         return view('pages.buy')->with('error', 'Trip not available or no seats left.');
+    //     }
+    
+    //     // Get the seat numbers for the given trip
+    //     $seatNumbers = Seat::where('trip_id', $busCode)->pluck('seat_number')->toArray();
+    
+    //     // Pass the data to the view
+    //     return view('pages.buy', compact('paribahanName', 'availableSeats', 'busCode', 'seatNumbers'));
+    // }
 
     public function submit_buy(Request $request) {
+        
         // // Store customer information
         // $busCode = $request->query('busCode');
         // $customer = Customer::create([
@@ -50,6 +89,7 @@ class BusTicketController extends Controller
         //     }
         // }
         
+
     // Store customer information
     $busCode = $request->query('busCode');
     $customer = Customer::create([

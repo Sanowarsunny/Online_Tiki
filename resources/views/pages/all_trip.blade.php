@@ -29,6 +29,9 @@
                                         To
                                     </th>
                                     <th scope="col" class="px-6 py-3">
+                                        Journey Date
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Departure Time
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -42,7 +45,7 @@
                                         Fare/Seat
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Cancellation
+                                        Action
                                     </th>
                                 </tr>
                             </thead>
@@ -63,6 +66,9 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $trip->to }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $trip->journey_date }}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{-- {{ $trip->arrival_time }} --}}
