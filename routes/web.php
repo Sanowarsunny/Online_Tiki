@@ -48,6 +48,8 @@ Route::prefix('bus')->middleware('auth')->group(function() {
     Route::get('/show', [FindController::class, 'show'])->name('bus.show');
 
     Route::get('/buy-ticket', [BusTicketController::class, 'buy'])->name('bus.buy-ticket');
+    // Route::match(['get', 'post'], '/buy-ticket/{busCode}', [BusTicketController::class, 'submit_buy'])
+    // ->name('bus.buy-ticket');
     Route::post('/buy-ticket', [BusTicketController::class, 'submit_buy'])->name('bus.buy-ticket');
 
     // Purchased Ticket Page

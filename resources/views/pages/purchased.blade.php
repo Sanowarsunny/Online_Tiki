@@ -16,20 +16,15 @@
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
+                                    
                                     <th scope="col" class="px-6 py-3">
                                         Customer Name
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Phone
+                                        Customer Phone
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Paribahan
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Dep.Time
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Arr.Time
+                                        Paribahan Name
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         From
@@ -38,10 +33,17 @@
                                         To
                                     </th>
                                     <th scope="col" class="px-6 py-3">
+                                        Dep.Time
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Arr.Time
+                                    </th>
+                                    
+                                    <th scope="col" class="px-6 py-3">
                                         Seats Number
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Fare/Seat
+                                        Total Price
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Action
@@ -49,40 +51,48 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($customers as $customer)
                                 <tr class="border-b odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
+                                
                                     <td scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $trips->paribahan_name }}
+                                        {{ $customer->customer_name }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        +8801234567891
+                                        {{ $customer->phone }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        Hanif Paribahon
+                                        {{ $customer->trip->paribahan_name }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        10:20 pm
+                                        {{ $customer->trip->from }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        03.00 am
+                                        {{ $customer->trip->to}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        Dhaka
+                                        {{ $customer->trip->departure_time }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        Chittagong
+                                        {{ $customer->trip->arrival_time }}
+                                    </td>
+                                    
+                                    <td class="px-6 py-4">
+                                        {{ implode(', ', $customer->seats->pluck('seat_number')->toArray()) }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        12
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        999
+                                    @php
+                                    $totalPrice = $customer->seats->count() * $customer->trip->ticket_price;
+                                    @endphp
+                                        {{ $totalPrice }}
                                     </td>
                                     
                                     <td class="px-6 py-4">
                                         <a href="#" type="submit"
                                             class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Cancel</a>
                                     </td>
+                                    @endforeach
+                                    
                                 </tr>
                             </tbody>
                         </table>

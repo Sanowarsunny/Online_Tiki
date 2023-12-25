@@ -11,8 +11,15 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
 
-                    <form class="max-w-sm mx-auto" method="POST" action="{{ route('bus.buy-ticket',['phone']) }}">
+                    <form class="max-w-sm mx-auto" method="POST" action="{{ route('bus.buy-ticket', ['busCode' => $busCode]) }}">
                         @csrf
+                        <div class="mb-5">
+                            <label for="countries"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Bus Code: {{ $busCode }}
+                            </label>
+                            
+                        </div>
                         <div class="mb-5">
                             <label for="countries"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

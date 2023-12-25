@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
-    protected $fillable = ['customer_name', 'email', 'phone'];
+    protected $fillable = ['customer_name', 'email', 'phone','trip_id'];
     public function seats()
     {
         return $this->hasMany(Seat::class);
     }
-    // Define the inverse relationship between Customer and Trip
+
     public function trip()
     {
         return $this->belongsTo(Trip::class);
