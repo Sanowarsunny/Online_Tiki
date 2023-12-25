@@ -84,10 +84,8 @@
                                         {{ implode(', ', $customer->seats->pluck('seat_number')->toArray()) }}
                                     </td>
                                     <td class="px-6 py-4">
-                                    @php
-                                    $totalPrice = $customer->seats->count() * $customer->trip->ticket_price;
-                                    @endphp
-                                        {{ $totalPrice }}
+                                        {{ $customer->seats->sum('total_price') }}
+                                       
                                     </td>
                                     
                                     <td class="px-6 py-4">
