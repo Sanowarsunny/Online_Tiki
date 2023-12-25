@@ -71,10 +71,13 @@
                                         {{ $customer->trip->to}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $customer->trip->departure_time }}
+                                        {{-- {{ $customer->trip->departure_time }} --}}
+                                        {{ date('h:i A', strtotime($customer->trip->departure_time)) }}
+
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $customer->trip->arrival_time }}
+                                        {{-- {{ $customer->trip->arrival_time }} --}}
+                                        {{ date('h:i A', strtotime($customer->trip->arrival_time)) }}
                                     </td>
                                     
                                     <td class="px-6 py-4">

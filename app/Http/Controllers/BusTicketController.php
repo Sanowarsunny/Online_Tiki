@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 
 class BusTicketController extends Controller
 {
-    //
+    
     function buy(Request $request){
         $busCode = $request->input('bus_code');
         $paribahanName = $request->input('paribahan_name');
         $availableSeats = $request->input('available_seats');
         return view('pages.buy',compact('paribahanName','availableSeats','busCode'));
     }
+   
 
     public function submit_buy(Request $request) {
         // Store customer information
@@ -48,6 +49,7 @@ class BusTicketController extends Controller
                 ]);
             }
         }
+        
     
         // Redirect or return the appropriate response
         return redirect()->route('bus.purchased-ticket');

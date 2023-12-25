@@ -9,14 +9,7 @@ class FindController extends Controller
     {
         return view('pages.find');
     }
-    // function buy(){
-    //     return view('pages.buy');
-    // }
-
-    // function submit_buy() {
-    //     return redirect()->route('bus.purchased-ticket');
-    // }
-
+    
     function show(Request $request){
         
         // $request->validate([
@@ -36,7 +29,4 @@ class FindController extends Controller
         return view('pages.show',compact('trips'));
     }
 
-    function purchased() {
-        return view('pages.purchased');
-    }
 }

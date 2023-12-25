@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('seats', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('customer_id')->constrained();
-            $table->string('seat_number');
-            $table->timestamps();
+        Schema::table('seats', function (Blueprint $table) {
+            //
+            $table->string('paribahan_name')->nullable();
         });
     }
 
@@ -24,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('seats');
+        Schema::table('seats', function (Blueprint $table) {
+            //
+        });
     }
 };
