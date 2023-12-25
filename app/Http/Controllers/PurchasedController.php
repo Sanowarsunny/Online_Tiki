@@ -32,4 +32,22 @@ class PurchasedController extends Controller
         //return view('pages.purchased',['customer' => $customer,'trips'=>$trips]);
     }
 
+    public function purchasedDelete($id){
+        $customer = Customer::find($id); // Find the trip by ID
+
+    if (!$customer) {
+        return redirect()->back()->with('error', 'Trip not found');
+    }
+    $seats = $customer->seats; // Retrieve associated seats
+
+    // Delete seats
+    foreach ($seats as $seat) {
+        $seat->delete();
+    }
+
+
+    $customer->delete(); // Delete the trip
+
+    return redirect()->route('bus.purchased-ticket')->with('success', 'Trip deleted successfully');
+    }
 }

@@ -15,7 +15,7 @@ class AllTripController extends Controller
     }
 
     public function deleteTrip($id)
-{
+    {
     $trip = Trip::find($id); // Find the trip by ID
 
     if (!$trip) {

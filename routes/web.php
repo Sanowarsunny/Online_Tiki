@@ -55,6 +55,7 @@ Route::prefix('bus')->middleware('auth')->group(function() {
     // Purchased Ticket Page
 
     Route::get('/purchased-ticket', [PurchasedController::class, 'purchased'])->name('bus.purchased-ticket');
+    Route::get('/purchased-ticket/{id}', [PurchasedController::class, 'purchasedDelete'])->name('bus.purchased-delete');
     
     // All Availble Trips Page
 
