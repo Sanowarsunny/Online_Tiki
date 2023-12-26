@@ -21,10 +21,10 @@ class BusTicketController extends Controller
         // Get the seat numbers for the given trip
         // $seatNumbers = Seat::where('trip_id', $busCode)->pluck('seat_number')->toArray();
         // Get the seat numbers as a comma-separated string
-    $seatNumbersString = Seat::where('trip_id', $busCode)->pluck('seat_number')->implode(',');
+        $seatNumbersString = Seat::where('trip_id', $busCode)->pluck('seat_number')->implode(',');
 
-    // Convert the seat numbers string to an array
-    $seatNumbers = explode(',', $seatNumbersString);
+        // Convert the seat numbers string to an array
+        $seatNumbers = explode(',', $seatNumbersString);
         //dd($seatNumbers);
         // // If trip not found or no seats available, show an error or redirect
         // if (!$trip || $trip->available_seats <= 0) {

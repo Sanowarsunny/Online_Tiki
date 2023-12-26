@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\Trip;
+use App\Models\Seat;
+
 
 
 class PurchasedController extends Controller
@@ -32,22 +34,35 @@ class PurchasedController extends Controller
         //return view('pages.purchased',['customer' => $customer,'trips'=>$trips]);
     }
 
-    public function purchasedDelete($id){
-        $customer = Customer::find($id); // Find the trip by ID
+    public function purchasedDelete($id)
+{
+    $customer = Customer::find($id); // Find the customer by ID
 
     if (!$customer) {
-        return redirect()->back()->with('error', 'Trip not found');
+        return redirect()->back()->with('error', 'Customer not found');
     }
-    $seats = $customer->seats; // Retrieve associated seats
+
+    $trip = $customer->trip; // Retrieve associated trip
+
+    if (!$trip) {
+        return redirect()->back()->with('error', 'Trip not found for the customer');
+    }
+
+    // Retrieve associated seats
+    $seatNumbersString = $customer->seats->pluck('seat_number')->implode(',');
+
+    // Convert the seat numbers string to an array
+    $seats = explode(',', $seatNumbersString);
+
+    // Increase available_seats in Trip
+    $trip->increment('total_seats', count($seats));
 
     // Delete seats
-    foreach ($seats as $seat) {
-        $seat->delete();
-    }
+    $customer->seats()->delete();
 
+    // Delete customer
+    $customer->delete();
 
-    $customer->delete(); // Delete the trip
-
-    return redirect()->route('bus.purchased-ticket')->with('success', 'Trip deleted successfully');
-    }
+    return redirect()->route('bus.purchased-ticket')->with('success', 'Customer and associated seats deleted successfully');
+}
 }
